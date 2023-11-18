@@ -2,6 +2,7 @@
 #include <stdlib.h> //biblioteca de alocação de espaço de memória
 #include <locale.h> //biblioteca de alocações de texto por região
 #include <string.h> //biblioteca responsável por cuidar de strings
+#include <stdbool.h> //biblioteca para usar o tipo boolean
 
 int registrar() //Função para inserir novo registro
 {	
@@ -11,50 +12,67 @@ int registrar() //Função para inserir novo registro
 	char sobrenome[40];
 	char cargo[40];
 	
-	printf("Digite o CPF a ser cadastrado: ");
-	scanf("%s", cpf);
+	int escolha; //Variável de controle a ser usada no laço de continuar cadastros
+	bool continuar = true; //Variável para o laço de continuar cadastros
 	
-	strcpy(arquivo, cpf); //Copiar cpf para arquivo.
-	
-	FILE *file; //cria um arquivo
-	file = fopen(arquivo, "w"); //cria arquivo com nome da variavel arquivo com "w" de write.
-	fprintf(file, cpf); //salva o valor da variavel
-	fclose(file); //fecha o arquivo
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, ",");
-	fclose(file);
-	
-	printf("Digite o nome a ser cadastrado: ");
-	scanf("%s", nome);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, nome);
-	fclose(file);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, ",");
-	fclose(file);
-	
-	printf("Digite o sobrenome a ser cadastrado: ");
-	scanf("%s", sobrenome);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, sobrenome);
-	fclose(file);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, ",");
-	fclose(file);
-	
-	printf("Digite o cargo a ser cadastrado: ");
-	scanf("%s", cargo);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, cargo);
-	fclose(file);
+	while(continuar) //Esse laço serve para continuar cadastrando, caso o usuário deseje.
+	{
+		printf("Digite o CPF a ser cadastrado: ");
+		scanf("%s", cpf);
 		
-	system("pause");
+		strcpy(arquivo, cpf); //Copiar cpf para arquivo.
+		
+		FILE *file; //cria um arquivo
+		file = fopen(arquivo, "w"); //cria arquivo com nome da variavel arquivo com "w" de write.
+		fprintf(file, cpf); //salva o valor da variavel
+		fclose(file); //fecha o arquivo
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, ",");
+		fclose(file);
+		
+		printf("Digite o nome a ser cadastrado: ");
+		scanf("%s", nome);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, nome);
+		fclose(file);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, ",");
+		fclose(file);
+		
+		printf("Digite o sobrenome a ser cadastrado: ");
+		scanf("%s", sobrenome);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, sobrenome);
+		fclose(file);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, ",");
+		fclose(file);
+		
+		printf("Digite o cargo a ser cadastrado: ");
+		scanf("%s", cargo);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, cargo);
+		fclose(file);
+		
+		printf("Cadastrado com sucesso!\n");
+		printf("Digite 1 para continuar ou 0 para voltar: ");
+		scanf("%d", &escolha);
+		
+		//teste para sair do laço
+		if(escolha == 0){
+			continuar = false;
+		} else {
+			printf("Ok, então vamos continuar!\n");
+		}
+		
+		
+	}
 	
 }
 
